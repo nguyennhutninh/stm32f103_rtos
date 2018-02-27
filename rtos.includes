@@ -1,0 +1,11 @@
+Source
+Source/FreeRTOS/Source/include
+Source/FreeRTOS/Source/portable/GCC/ARM_CA9
+Source/FreeRTOS/Source/portable/GCC/ARM_CM0
+Source/FreeRTOS/Source/portable/GCC/ARM_CM3
+Source/FreeRTOS/Source/portable/GCC/ARM_CM3_MPU
+Source/FreeRTOS/Source/portable/GCC/ARM_CM4F
+Source/Library
+Source/Library/CMSIS/Device/ST/STM32F10x/Include
+Source/Library/CMSIS/Include
+Source/Library/STM32F10x_StdPeriph_Driver/inc
