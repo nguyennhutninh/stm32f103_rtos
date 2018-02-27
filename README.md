@@ -1,10 +1,10 @@
-STM32F103 Demo Application using FreeRTOSv8.0.0
+STM32F1-Nucleo Demo Application using FreeRTOSv8.0.0
 =======================================================
 
 # Description
 
-This is a fork of https://github.com/torstenbitterlich/stm32f1-nucleo-freertos . I just modified the project to be able to run on my stm32f103 board.
-
+This is a fork of https://github.com/rgrover/stm32f0-discovery. I just modified the project to be able to compile it on the console using a makefile.
+I'm currently working on making the demo usable on the stm32f1-nucleo board.
 
 # Usage
 
@@ -13,4 +13,8 @@ Beside that, you need to add the FreeRTOS Source to the project. The current ver
 
 If you setup a path to the locally installed toolchain, you will be able to build the project using "make". This will generate the binary, which can be loaded
 to the target hardware using openocd/gdb.
+
+# Acknowledgements
+
+The Makefile for the peripheral library for the STM32F0 was taken from https://github.com/szczys/stm32f0-discovery-basic-template.
 

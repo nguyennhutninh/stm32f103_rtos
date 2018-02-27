@@ -17,8 +17,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -31,55 +31,56 @@
 #define __STM32F1XX_NUCLEO_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
-                                              
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
-   
+#include "../common/cmd_line.h"
+
 /** @addtogroup Utilities
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32F1XX_NUCLEO
   * @{
   */
-      
+
 /** @defgroup STM32F1XX_NUCLEO_LOW_LEVEL 
   * @brief This file provides set of firmware functions to manage Leds and push-button
   *        available on STM32NUCLEO Kit from STMicroelectronics.
   * @{
   */
-      
+
 /** @defgroup STM32F1XX_NUCLEO_LOW_LEVEL_Exported_Types
   * @{
   */
 typedef enum 
 {
-  LED2 = 0,
-  
+	LED2 = 0,
+
 } Led_TypeDef;
 
 typedef enum 
 {  
-  BUTTON_USER = 0,
+	BUTTON_USER = 0,
 } Button_TypeDef;
 
 typedef enum 
 {  
-  BUTTON_MODE_GPIO = 0,
-  BUTTON_MODE_EXTI = 1
+	BUTTON_MODE_GPIO = 0,
+	BUTTON_MODE_EXTI = 1
 } ButtonMode_TypeDef; 
 
 /* The Joystick is available on adafruit 1.8" TFT shield */     
 typedef enum 
 { 
-  JOY_NONE = 0,
-  JOY_SEL = 1,
-  JOY_DOWN = 2,
-  JOY_LEFT = 3,
-  JOY_RIGHT = 4,
-  JOY_UP = 5
+	JOY_NONE = 0,
+	JOY_SEL = 1,
+	JOY_DOWN = 2,
+	JOY_LEFT = 3,
+	JOY_RIGHT = 4,
+	JOY_UP = 5
 } JOYState_TypeDef;
 
 /**
@@ -98,14 +99,14 @@ typedef enum
 #define LCD_DC_LOW()  LCD_DC_GPIO_PORT->BRR = LCD_DC_PIN
 
 /**
-  * @brief SD CS line management 
+  * @brief SD CS line management
   */
 #define SD_CS_HIGH()  SD_CS_GPIO_PORT->BSRR = SD_CS_PIN
 #define SD_CS_LOW()   SD_CS_GPIO_PORT->BRR = SD_CS_PIN    
 
 /**
   * @}
-  */  
+  */
 
 /** @defgroup STM32F1XX_NUCLEO_LOW_LEVEL_Exported_Constants
   * @{
@@ -126,7 +127,7 @@ typedef enum
 
 /** @addtogroup STM32F1XX_NUCLEO_LOW_LEVEL_BUTTON
   * @{
-  */  
+  */
 #define BUTTONn                          1  
 
 /**
@@ -142,7 +143,7 @@ typedef enum
 /**
   * @}
   */
-    
+
 /** @addtogroup STM32F1XX_NUCLEO_LOW_LEVEL_SPI
   * @{
   */
@@ -194,25 +195,40 @@ typedef enum
 #define LCD_CS_PIN                    GPIO_Pin_6                  /* PB.6*/
 #define LCD_CS_GPIO_PORT              GPIOB                       /* GPIOB */
 #define LCD_CS_GPIO_CLK               RCC_APB2Periph_GPIOB
-      
+
 /**
   * @brief  ADC Interface pins
   */
 /* The ADC is used to detect motion of Joystick available on adafruit 1.8" TFT shield */      
 #define ADCx                            ADC1
 #define ADC_CLK                         RCC_APB2Periph_ADC1
-    
+
 #define ADC_GPIO_PIN                    GPIO_Pin_0                  /* PB.0  */
 #define ADC_GPIO_PORT                   GPIOB                       /* GPIOB */
 #define ADC_GPIO_CLK                    RCC_APB2Periph_GPIOB
 
- /*****************************************************************************
+/*****************************************************************************
   *Pin map led life
  ******************************************************************************/
- #define LED_LIFE_IO_PIN							(GPIO_Pin_7)
+#define LED_LIFE_IO_PIN							(GPIO_Pin_7)
 
- #define LED_LIFE_IO_PORT							(GPIOE)
- #define LED_LIFE_IO_CLOCK							(RCC_APB2Periph_GPIOE)
+#define LED_LIFE_IO_PORT							(GPIOE)
+#define LED_LIFE_IO_CLOCK							(RCC_APB2Periph_GPIOE)
+
+/* USART Communication boards Interface */
+#define USARTx                           USART1
+#define USARTx_CLK                       RCC_APB2Periph_USART1
+#define USARTx_IRQn                      USART1_IRQn
+
+#define USARTx_TX_PIN                    GPIO_Pin_9
+#define USARTx_TX_GPIO_PORT              GPIOA
+#define USARTx_TX_GPIO_CLK               RCC_APB2Periph_GPIOA
+#define USARTx_TX_SOURCE                 GPIO_PinSource9
+
+#define USARTx_RX_PIN                    GPIO_Pin_10
+#define USARTx_RX_GPIO_PORT              GPIOA
+#define USARTx_RX_GPIO_CLK               RCC_APB2Periph_GPIOA
+#define USARTx_RX_SOURCE                 GPIO_PinSource10
 
 /**
   * @}
@@ -239,6 +255,8 @@ JOYState_TypeDef STM_Get_JOYState(void);
 extern void led_life_init();
 extern void led_life_on();
 extern void led_life_off();
+extern void sys_cfg_console();
+extern void io_uart_interface_put_char(uint8_t c);
 
 /**
   * @}
@@ -251,14 +269,14 @@ extern void led_life_off();
 #endif /* __STM32F1XX_NUCLEO_H */
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -39,9 +39,11 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+
 static __IO uint32_t TimingDelay;
 
 void prvSetupHardware(void) {
+	sys_cfg_console();
 	led_life_init();
 }
 
@@ -51,9 +53,18 @@ void blinkyTask(void *dummy) {
 	while (1) {
 		/* maintain LED2 status for 100ms */
 		led_life_on();
-		vTaskDelay(100);
+		vTaskDelay(600);
 		led_life_off();
-		vTaskDelay(100);
+		vTaskDelay(600);
+	}
+}
+
+void systemConsole(void *dummy) {
+	(void)dummy;
+
+	while (1) {
+		io_uart_interface_put_char('1');
+		vTaskDelay(1000);
 	}
 }
 
@@ -63,6 +74,13 @@ void vTaskInit(void) {
 				configMINIMAL_STACK_SIZE,
 				NULL,                 /* pvParameters */
 				tskIDLE_PRIORITY + 1, /* uxPriority */
+				NULL                  /* pvCreatedTask */);
+
+	xTaskCreate(systemConsole,
+				(const signed char *)"systemConsole",
+				configMINIMAL_STACK_SIZE,
+				NULL,                 /* pvParameters */
+				tskIDLE_PRIORITY + 2, /* uxPriority */
 				NULL                  /* pvCreatedTask */);
 }
 

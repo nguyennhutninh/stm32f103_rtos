@@ -15,6 +15,8 @@ Source/FreeRTOS/Source/timers.c \
 Source/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c \
 Source/FreeRTOS/Source/portable/MemMang/heap_1.c
 
+-include sources/common/Makefile.mk
+
 # target binary name
 TARGET_NAME = main
 
@@ -39,7 +41,7 @@ CFLAGS += -ffunction-sections -fdata-sections
 CFLAGS += -Wl,--gc-sections -Wl,-Map=$(TARGET_NAME).map
 CFLAGS += -DSTM32F10X_MD
 CFLAGS += -DUSE_STDPERIPH_DRIVER
-
+#-Wpointer-sign
 vpath %.a $(STM_LIB)
 
 ROOT=$(shell pwd)

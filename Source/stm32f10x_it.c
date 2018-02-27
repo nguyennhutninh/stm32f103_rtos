@@ -73,6 +73,11 @@ void HardFault_Handler(void)
   }
 }
 
+void USART1_IRQHandler(void) {
+	if (USART_GetITStatus(USARTx, USART_IT_RXNE) == SET) {
+		sys_irq_shell();
+	}
+}
 
 /******************************************************************************/
 /*                 STM32f10x Peripherals Interrupt Handlers                   */
