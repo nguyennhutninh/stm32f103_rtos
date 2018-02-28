@@ -14,3 +14,5 @@ Source/FreeRTOS/Source/portable/MemMang
 Source/common
 Source/Library/CMSIS/Device/ST/STM32F10x/Source/Templates
 Source/Library/STM32F10x_StdPeriph_Driver/src
+Source/driver
+Source/driver/general_output

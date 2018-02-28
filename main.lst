@@ -20,7 +20,7 @@ SYMBOL TABLE:
 00000000 l    d  .debug_str	00000000 .debug_str
 00000000 l    d  .comment	00000000 .comment
 00000000 l    d  .debug_frame	00000000 .debug_frame
-00000000 l    df *ABS*	00000000 /tmp/ccfbkyCz.o
+00000000 l    df *ABS*	00000000 /tmp/ccU2a7Cs.o
 f108f85f l       *ABS*	00000000 BootRAM
 0800105c l       .text	00000000 LoopCopyDataInit
 08001054 l       .text	00000000 CopyDataInit
@@ -4159,13 +4159,13 @@ void task_life(void *dummy) {
 	while (1) {
 		led_life_on();
  8000e4a:	f000 f8f5 	bl	8001038 <led_life_on>
-		vTaskDelay(600);
- 8000e4e:	f44f 7016 	mov.w	r0, #600	; 0x258
+		vTaskDelay(1000);
+ 8000e4e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8000e52:	f000 fb97 	bl	8001584 <vTaskDelay>
 		led_life_off();
  8000e56:	f000 f8f5 	bl	8001044 <led_life_off>
-		vTaskDelay(600);
- 8000e5a:	f44f 7016 	mov.w	r0, #600	; 0x258
+		vTaskDelay(1000);
+ 8000e5a:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8000e5e:	f000 fb91 	bl	8001584 <vTaskDelay>
  8000e62:	e7f2      	b.n	8000e4a <task_life+0x2>
 
@@ -4264,7 +4264,7 @@ void vTaskInit(void) {
  8000ec0:	4904      	ldr	r1, [pc, #16]	; (8000ed4 <vTaskInit+0x3c>)
  8000ec2:	4805      	ldr	r0, [pc, #20]	; (8000ed8 <vTaskInit+0x40>)
  8000ec4:	f000 f96e 	bl	80011a4 <xTaskGenericCreate>
-				(const signed char *)"task_shell",
+				(const char* const)"task_shell",
 				configMINIMAL_STACK_SIZE,
 				NULL,                 /* pvParameters */
 				tskIDLE_PRIORITY + 2, /* uxPriority */
@@ -4285,10 +4285,6 @@ void vTaskInit(void) {
 
 int main(void) {
  8000edc:	b508      	push	{r3, lr}
-	 * this is done through SystemInit() function which is called from startup
-	 * file (startup_stm32f2xx_xx.s) before to branch to application main.
-	 * To reconfigure the default setting of SystemInit() function, refer to
-	 * system_stm32f2xx.c file */
 
 	prvSetupHardware();
  8000ede:	f7ff ffd3 	bl	8000e88 <prvSetupHardware>

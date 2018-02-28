@@ -22,6 +22,9 @@ Source/common/fifo.c \
 Source/sys_cfg.c \
 Source/shell.c
 
+CPP_SRCS = \
+Source/driver/general_output/general_output.cpp
+
 # target binary name
 TARGET_NAME = main
 
@@ -46,7 +49,7 @@ CFLAGS += -ffunction-sections -fdata-sections
 CFLAGS += -Wl,--gc-sections -Wl,-Map=$(TARGET_NAME).map
 CFLAGS += -DSTM32F10X_MD
 CFLAGS += -DUSE_STDPERIPH_DRIVER
-#-Wpointer-sign
+
 vpath %.a $(STM_LIB)
 
 ROOT=$(shell pwd)

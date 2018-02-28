@@ -57,9 +57,9 @@ void task_life(void *dummy) {
 
 	while (1) {
 		led_life_on();
-		vTaskDelay(600);
+		vTaskDelay(1000);
 		led_life_off();
-		vTaskDelay(600);
+		vTaskDelay(1000);
 	}
 }
 
@@ -77,14 +77,14 @@ void task_shell(void *dummy) {
 
 void vTaskInit(void) {
 	xTaskCreate(task_life,
-				(const signed char *)"task_life",
+				(const char* const)"task_life",
 				configMINIMAL_STACK_SIZE,
 				NULL,                 /* pvParameters */
 				tskIDLE_PRIORITY + 1, /* uxPriority */
 				NULL                  /* pvCreatedTask */);
 
 	xTaskCreate(task_shell,
-				(const signed char *)"task_shell",
+				(const char* const)"task_shell",
 				configMINIMAL_STACK_SIZE,
 				NULL,                 /* pvParameters */
 				tskIDLE_PRIORITY + 2, /* uxPriority */
@@ -101,11 +101,6 @@ void vTaskInit(void) {
   */
 
 int main(void) {
-	/*!< At this stage the microcontroller clock setting is already configured,
-	 * this is done through SystemInit() function which is called from startup
-	 * file (startup_stm32f2xx_xx.s) before to branch to application main.
-	 * To reconfigure the default setting of SystemInit() function, refer to
-	 * system_stm32f2xx.c file */
 
 	prvSetupHardware();
 
