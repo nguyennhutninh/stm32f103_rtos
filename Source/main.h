@@ -31,15 +31,19 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
-#include "stm32f1xx_nucleo.h"
+#include "io_cfg.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
+
+extern uint8_t cmd_flag;
+
 void TimingDelay_Decrement(void);
 void Delay(__IO uint32_t nTime);
+
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

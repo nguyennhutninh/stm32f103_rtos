@@ -31,9 +31,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/** @addtogroup STM32F103 BOARD
-  * @{
-  */
+#include <stdarg.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#include "sys_cfg.h"
+#include "../common/xprintf.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -42,16 +45,17 @@
 
 static __IO uint32_t TimingDelay;
 
+uint8_t cmd_flag = 0;
+
 void prvSetupHardware(void) {
 	sys_cfg_console();
 	led_life_init();
 }
 
-void blinkyTask(void *dummy) {
+void task_life(void *dummy) {
 	(void)dummy;
 
 	while (1) {
-		/* maintain LED2 status for 100ms */
 		led_life_on();
 		vTaskDelay(600);
 		led_life_off();
@@ -63,14 +67,17 @@ void systemConsole(void *dummy) {
 	(void)dummy;
 
 	while (1) {
-		io_uart_interface_put_char('1');
-		vTaskDelay(1000);
+		if (cmd_flag) {
+			task_shell(shell.data);
+			cmd_flag = 0;
+		}
+		vTaskDelay(10);
 	}
 }
 
 void vTaskInit(void) {
-	xTaskCreate(blinkyTask,
-				(const signed char *)"blinkyTask",
+	xTaskCreate(task_life,
+				(const signed char *)"task_life",
 				configMINIMAL_STACK_SIZE,
 				NULL,                 /* pvParameters */
 				tskIDLE_PRIORITY + 1, /* uxPriority */
@@ -92,6 +99,7 @@ void vTaskInit(void) {
   * @param  None
   * @retval None
   */
+
 int main(void) {
 	/*!< At this stage the microcontroller clock setting is already configured,
 	 * this is done through SystemInit() function which is called from startup

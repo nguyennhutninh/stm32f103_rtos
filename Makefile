@@ -4,7 +4,7 @@ SRCS =  \
 Source/main.c \
 Source/stm32f10x_it.c \
 Source/system_stm32f10x.c \
-Source/stm32f1xx_nucleo.c \
+Source/io_cfg.c \
 startup/startup_stm32f10x_md.s \
 Source/FreeRTOS/Source/croutine.c \
 Source/FreeRTOS/Source/event_groups.c \
@@ -13,9 +13,14 @@ Source/FreeRTOS/Source/queue.c \
 Source/FreeRTOS/Source/tasks.c \
 Source/FreeRTOS/Source/timers.c \
 Source/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c \
-Source/FreeRTOS/Source/portable/MemMang/heap_1.c
-
--include sources/common/Makefile.mk
+Source/FreeRTOS/Source/portable/MemMang/heap_1.c \
+Source/common/utils.c \
+Source/common/xprintf.c \
+Source/common/cmd_line.c \
+Source/common/log_queue.c \
+Source/common/fifo.c \
+Source/sys_cfg.c \
+Source/shell.c
 
 # target binary name
 TARGET_NAME = main
@@ -52,7 +57,8 @@ CFLAGS += -I Source \
 -I $(STM_LIB)/CMSIS/Include \
 -I $(STM_LIB)/STM32F10x_StdPeriph_Driver/inc \
 -I Source/FreeRTOS/Source/include \
--I Source/FreeRTOS/Source/portable/GCC/ARM_CM3
+-I Source/FreeRTOS/Source/portable/GCC/ARM_CM3 \
+-I Source/common
 
 OBJS = $(SRCS:.c=.o)
 

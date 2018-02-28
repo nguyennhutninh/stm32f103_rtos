@@ -1,9 +1,6 @@
-
-
 GCC_PATH	= /home/fanning/workspace/tools/gcc-arm-none-eabi-5_4-2016q3
 OPENOCD_PATH	= /home/fanning/workspace/tools/openocd-0.9.0
 
-#CC		=	/home/fanning/workspace/tools/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-gcc
 CC		=	$(GCC_PATH)/bin/arm-none-eabi-gcc
 AR		=	$(GCC_PATH)/bin/arm-none-eabi-ar
 

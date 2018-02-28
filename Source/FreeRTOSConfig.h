@@ -93,7 +93,7 @@
 #define configMAX_SYSCALL_INTERRUPT_PRIORITY 255
 
 #define configMINIMAL_STACK_SIZE		( ( unsigned short ) 128 )
-#define configTOTAL_HEAP_SIZE			( ( size_t ) ( 4 * 1024 ) )
+#define configTOTAL_HEAP_SIZE			( ( size_t ) ( 2 * 1024 ) )
 #define configMAX_TASK_NAME_LEN			( 16 )
 #define configUSE_TRACE_FACILITY		0
 #define configUSE_16_BIT_TICKS			0
