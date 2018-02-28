@@ -63,12 +63,12 @@ void task_life(void *dummy) {
 	}
 }
 
-void systemConsole(void *dummy) {
+void task_shell(void *dummy) {
 	(void)dummy;
 
 	while (1) {
 		if (cmd_flag) {
-			task_shell(shell.data);
+			shell_handle(shell.data);
 			cmd_flag = 0;
 		}
 		vTaskDelay(10);
@@ -83,8 +83,8 @@ void vTaskInit(void) {
 				tskIDLE_PRIORITY + 1, /* uxPriority */
 				NULL                  /* pvCreatedTask */);
 
-	xTaskCreate(systemConsole,
-				(const signed char *)"systemConsole",
+	xTaskCreate(task_shell,
+				(const signed char *)"task_shell",
 				configMINIMAL_STACK_SIZE,
 				NULL,                 /* pvParameters */
 				tskIDLE_PRIORITY + 2, /* uxPriority */

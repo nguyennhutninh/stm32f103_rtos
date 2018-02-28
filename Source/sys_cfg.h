@@ -41,7 +41,7 @@ extern void xputchar(uint8_t c);
 extern uint8_t sys_ctrl_shell_get_char();
 extern void sys_irq_shell();
 extern void sys_cfg_console();
-extern void task_shell(uint8_t *msg);
+extern void shell_handle(uint8_t *msg);
 
 #ifdef __cplusplus
 }

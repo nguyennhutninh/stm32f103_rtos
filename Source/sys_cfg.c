@@ -101,7 +101,7 @@ void sys_irq_shell() {
 	}
 }
 
-void task_shell(uint8_t *msg) {
+void shell_handle(uint8_t *msg) {
 
 	uint8_t fist_char = *msg;
 

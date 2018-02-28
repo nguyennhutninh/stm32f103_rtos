@@ -145,6 +145,7 @@ int32_t shell_help(uint8_t* argv) {
 }
 
 int32_t shell_reboot(uint8_t* argv) {
+	return 0;
 }
 
 int32_t shell_flash(uint8_t* argv) {
@@ -244,7 +245,6 @@ int32_t shell_modbus_rs485(uint8_t* argv) {
 	char*	cmd;
 	int8_t	addr = 0;
 	uint16_t	value = 0;
-	uint8_t slaveid = 0;
 
 	switch (num_str) {
 
@@ -253,7 +253,6 @@ int32_t shell_modbus_rs485(uint8_t* argv) {
 
 		cmd		= str_parser_get_attr(2);
 		addr	= atoi(str_parser_get_attr(3)); // check addrs
-		slaveid = atoi(str_parser_get_attr(1));
 
 		if ((addr < 0) || (addr > 12)) {
 			goto exception;
@@ -265,34 +264,13 @@ int32_t shell_modbus_rs485(uint8_t* argv) {
 			if ((value < 0) || (value > 1) ) {
 				goto exception;
 			}
-
-			uint16_t reg_data;
-
-			if(value == 0)
-				reg_data = 0xFF00;
-			else if(value == 1)
-				reg_data = 0x0000;
-			else
-				goto exception;
-
-			{
-				;
-			}
 		}
 		else if (strcmp((const char *)cmd, (const char *)"t") == 0) {
 			xprintf("modbus reset single coil\n");
 			value	= atoi(str_parser_get_attr(4));
-			uint16_t reg_data;
 
 			if(value < 50 || value > 100000) {
 				goto exception;
-			}
-			else {
-				reg_data = value;
-			}
-
-			{
-				;
 			}
 		}
 		else
